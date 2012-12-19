@@ -12,12 +12,12 @@
     $('form').submit(function(e){
       e.preventDefault();
       var message = $('#chat_input').val();
-      $('form').append('<p>' + message + '</p>');
+      $('form').prepend('<p>' + message + '</p>');
       server.emit('messages', message);
     });
     
     server.on('messages', function(data) {  
-      $('form').prepend('<p>' + data + '</p>');
+      $('#chat_area').prepend('<p>' + data + '</p>');
     });
   });
   </script>
@@ -26,4 +26,5 @@
     <input class='chat_form' type='text' id='chat_input'>
     <input class='chat_form' type='submit' value="Submit">
   </form>
+  <div id='chat_area'></div>
 </body>
