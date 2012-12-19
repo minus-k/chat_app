@@ -1,4 +1,29 @@
-<script src="/socket.io/socket.io.js"></script>
-<script>
-var server = io.connect('http://localhost:5000');
-</script>
+<!doctype html>
+<head>
+  <title>Ugly Chat</title>
+</head>
+<body>
+  <script src="/socket.io/socket.io.js"></script>
+  <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js'></script>
+  <script>
+  var server = io.connect(window.location.hostname);
+  $(document).ready( function() {  
+
+    $('form').submit(function(e){
+      e.preventDefault();
+      var message = $('#chat_input').val();
+      $('form').append('<p>' + message + '</p>');
+      server.emit('messages', message);
+    });
+    
+    server.on('messages', function(data) {  
+      $('form').append('<p>' + data + '</p>');
+    });
+  });
+  </script>
+
+  <form>
+    <input class='chat_form' type='text' id='chat_input'>
+    <input class='chat_form' type='submit' value="Submit">
+  </form>
+</body>
