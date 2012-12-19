@@ -3,10 +3,10 @@ var socket = require('socket.io');
 var app = express.createServer();
 var io = socket.listen(app);
 
-// io.configure(function () { 
-//   io.set("transports", ["xhr-polling"]); 
-//   io.set("polling duration", 10); 
-// });
+io.configure(function () { 
+  io.set("transports", ["xhr-polling"]); 
+  io.set("polling duration", 10); 
+});
 
 
 app.get('/', function(request, response) {
