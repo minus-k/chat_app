@@ -17,7 +17,7 @@
     });
     
     server.on('messages', function(data) {  
-      $('form').append('<p>' + data + '</p>');
+      $('form').prepend('<p>' + data + '</p>');
     });
   });
   </script>
