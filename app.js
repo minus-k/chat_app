@@ -14,8 +14,14 @@ app.get('/', function(request, response) {
 });
 
 io.sockets.on('connection', function(client) {
-  client.on('messages', function(data) {
-    client.broadcast.emit('messages', data);
+  client.on('join', function(name) {
+    client.set('nickname', name);
+  });
+
+  client.on('messages', function(message) {
+    client.get('nickname', function(error, name) {
+      client.broadcast.emit("messages", name + ": " + message);
+    });
   });
 });
 
