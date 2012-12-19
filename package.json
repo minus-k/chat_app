@@ -1,0 +1,9 @@
+{
+  "name": "chat_app",
+    "version": "0.0.1",
+     "dependencies": {
+        "express": "2.12.x",
+        "connect": "2.7.x",
+        "express": "3.0.x"
+      }
+}
