@@ -2,12 +2,35 @@ html, body {
   font-size : 100%;
 }
 
+#chatter {
+  position : absolute;
+  overflow : auto;
+  width : 15%;
+  height : 60%;
+  left : 15%;
+  top : 15%;
+  border : 2px solid #666;
+  border-radius : 5px;
+}
+
+.person {
+  padding : 10% 5% 2%;
+}
+
+#chatter span {
+  font-size : 1.3em;
+  text-decoration : underline;
+  position : absolute;
+  left : 33%;
+  top : 2%;
+}
+
 .container {
   position : absolute;
   overflow : auto;
   width : 50%;
   height : 60%;
-  left : 28%;
+  left : 31%;
   top : 15%;
   border : 2px solid #666;
   border-radius : 5px;

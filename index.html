@@ -1,9 +1,13 @@
 <!doctype html>
 <head>
-  <title>Ugly Chat</title>
+  <title>Digi Chat</title>
   <link rel='stylesheet' href='style.css' />
 </head>
 <body>
+  <div id='chatter'>
+    <span>Connected</span>
+    <div class='person'><p></p></div>
+  </div>
   <div class='container'>
     <div id='chat_area'></div>
   </div>
@@ -34,6 +38,20 @@
         $('#chat_area').prepend('<p>Me: ' + message + '</p>');
         server.emit('messages', message);
       });
+
+      server.on('entered', function(data) {
+        $('.person').append('<p>' + data + '</p>');
+      });
+
+      server.on('left', function(data) {
+        add_name(data);
+        <!-- $('.person').replaceWith('<div class="person"><span>Connected</span></div>'); -->
+        <!-- $('.person').append('<p>' + data + '</p>'); -->
+      });
+
+      function add_name(name) {
+        console.log(name);
+      }
       
       server.on('messages', function(data) {  
         $('#chat_area').prepend('<p>' + data + '</p>');
