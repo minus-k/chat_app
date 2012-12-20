@@ -1,45 +1,43 @@
 <!doctype html>
 <head>
   <title>Ugly Chat</title>
+  <link rel='stylesheet' href='style.css' />
 </head>
 <body>
-  <script src="/socket.io/socket.io.js"></script>
-  <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js'></script>
-  <script>
-  var server = io.connect(window.location.hostname);
-
-  server.on('connect', function(name) {
-    name = prompt('What is your name?');
-    server.emit('join', name);
-    <!-- $('#chatters').append('<p>' + name + ' has joined the chat</p>'); -->
-  });
-
-  $(document).ready( function() {  
-
-    $('form').submit(function(e){
-      e.preventDefault();
-      var message = $('#chat_input').val();
-      message = message.replace(/<\/?[^>]+(>|$)/g, "");
-      message = message.replace('iframe', '""');
-      $('#chat_input').val('');
-      $('#chat_area').prepend('<p>Me: ' + message + '</p>');
-      server.emit('messages', message);
-    });
-    
-    <!-- server.on('chat', function(data) { -->
-    <!--   $('#chatters').append('<p>' + data + '</p>'); -->
-    <!-- }); -->
-
-    server.on('messages', function(data) {  
-      $('#chat_area').prepend('<p>' + data + '</p>');
-    });
-  });
-  </script>
-
-  <!-- <div id='chatters'>Currently in the room</div> -->
+  <div class='container'>
+    <div id='chat_area'></div>
+  </div>
   <form>
     <input class='chat_form' type='text' id='chat_input'>
     <input class='chat_form' type='submit' value="Submit">
   </form>
-  <div id='chat_area'></div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js'></script>
+    <script>
+    var server = io.connect(window.location.hostname);
+
+    server.on('connect', function(name) {
+      name = prompt('What is your name?');
+      server.emit('join', name);
+    });
+
+    $(document).ready( function() {  
+      $('#chat_input').focus();
+
+      $('form').submit(function(e){
+        e.preventDefault();
+        var message = $('#chat_input').val();
+        message = message.replace(/<\/?[^>]+(>|$)/g, "");
+        message = message.replace('iframe', '""');
+        $('#chat_input').val('');
+        $('#chat_area').prepend('<p>Me: ' + message + '</p>');
+        server.emit('messages', message);
+      });
+      
+      server.on('messages', function(data) {  
+        $('#chat_area').prepend('<p>' + data + '</p>');
+      });
+    });
+    </script>
 </body>

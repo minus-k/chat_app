@@ -1,0 +1,24 @@
+html, body {
+  font-size : 100%;
+}
+
+.container {
+  position : absolute;
+  overflow : auto;
+  width : 50%;
+  height : 60%;
+  left : 28%;
+  top : 15%;
+  border : 2px solid #666;
+  border-radius : 5px;
+}
+
+#chat_area {
+  padding : 2%;
+}
+
+form {
+  position : absolute;
+  bottom : 20%;
+  left : 46%;
+}
