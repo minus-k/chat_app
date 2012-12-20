@@ -19,6 +19,7 @@
       e.preventDefault();
       var message = $('#chat_input').val();
       message = message.replace(/<\/?[^>]+(>|$)/g, "");
+      message = message.replace('iframe', '""');
       $('#chat_input').val('');
       $('#chat_area').prepend('<p>Me: ' + message + '</p>');
       server.emit('messages', message);
